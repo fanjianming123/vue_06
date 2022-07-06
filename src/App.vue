@@ -1,28 +1,34 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <MyTable>
+      <template v-slot:name="scope">
+        <input type="text" v-model="scope.row.name" />
+      </template>
+      <template v-slot:age="scope">
+        <input type="text" v-model="scope.row.age" />
+      </template>
+      <template v-slot:url="scope">
+        <div v-if="scope.row.type == 0">
+          <a :href="scope.row.headImgUrl">{{scope.row.headImgUrl}}</a>
+        </div>
+        <div v-if="scope.row.type == 1">
+          <img :src="scope.row.headImgUrl" alt="" />
+        </div>
+        <div v-if="scope.row.type == 2">
+          {{ scope.row.headImgUrl }}
+        </div>
+      </template>
+    </MyTable>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import MyTable from './components/MyTable.vue'
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
+    MyTable,
+  },
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
