@@ -19,14 +19,19 @@
           </div>
       </template>
     </MyTable>
+    
+    <keepAlive></keepAlive>
+   
   </div>
 </template>
 
 <script>
 import MyTable from './components/MyTable.vue'
+import keepAlive from './views/keep-alive.vue'
 export default {
   components:{
-    MyTable
+    MyTable,
+    keepAlive
   }
 }
 </script>
