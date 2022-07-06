@@ -1,60 +1,83 @@
 <template>
-  <div class="demo">
-    <h2>
-      <span :class="{ active: !isShow }" @click="ChangePhone">手机注册</span>
-      <span :class="{ active: isShow }" @click="ChangeEmail">邮箱注册</span>
-    </h2>
-    <div>
-      <keep-alive>
-      <component :is="isName"></component>
-      </keep-alive>
-    </div>
+  <div>
+    <Phone :arr="list">
+      <template v-slot:xuha="scope">
+        {{ scope.xuhao.id }}
+      </template>
+      <template v-slot:ming="scopeaa">
+        {{ scopeaa.mingz.name }}
+      </template>
+      <template v-slot:nian="scopebb">
+        {{ scopebb.nianl.age }}
+      </template>
+      <template v-slot:img="scopecc">
+        <img
+          v-if="scopecc.imga.type == 1"
+          :src="scopecc.imga.headImgUrl"
+          alt=""
+          style="width: 50px"
+        />
+        <a
+          v-else-if="scopecc.imga.type == 0"
+          :href="scopecc.imga.headImgUrl"
+        >{{scopecc.imga.headImgUrl}}</a>
+        <p v-else>{{ scopecc.imga.headImgUrl }}</p>
+      </template>
+    </Phone>
   </div>
 </template>
 <script>
 import Phone from './components/PhoneRegister.vue'
-import EmailBase from './components/EmailBase.vue'
 export default {
   data() {
     return {
-      isShow: false,
-      isName: 'EmailBase',
+      list: [
+        {
+          id: 100,
+          name: '小传同学',
+          age: 18,
+          headImgUrl:
+            'http://yun.itheima.com/Upload/./Images/20210303/603f2d2153241.jpg',
+          type: 0, // 0 显示成a标签
+        },
+        {
+          id: 101,
+          name: '小黑同学',
+          age: 25,
+          headImgUrl:
+            'http://yun.itheima.com/Upload/./Images/20210304/6040b101a18ef.jpg',
+          type: 1, // 1 显示成图片
+        },
+        {
+          id: 102,
+          name: '智慧同学',
+          age: 21,
+          headImgUrl:
+            'http://yun.itheima.com/Upload/./Images/20210302/603e0142e535f.jpg',
+          type: 1, // 1 显示成图片
+        },
+        {
+          id: 103,
+          name: '智慧同学',
+          age: 21,
+          headImgUrl:
+            'http://yun.itheima.com/Upload/./Images/20210302/603e0142e535f.jpg',
+          type: 2, // 2 显示成文本
+        },
+        {
+          id: 101,
+          name: '小黑同学',
+          age: 25,
+          headImgUrl:
+            'http://yun.itheima.com/Upload/./Images/20210304/6040b101a18ef.jpg',
+          type: 1, // 1 显示成图片
+        },
+      ],
     }
   },
   components: {
     Phone,
-    EmailBase,
-  },
-  mounted() {},
-  computed: {},
-  methods: {
-    ChangePhone() {
-      this.isName = 'EmailBase'
-      this.isShow = !this.isShow
-    },
-    ChangeEmail() {
-      this.isName = 'Phone'
-      this.isShow = !this.isShow
-    },
   },
 }
 </script>
-<style scoped>
-.demo {
-  position: absolute;
-  width: 500px;
-  left: calc(50% - 250px);
-  top: 10%;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(6px);
-  border-radius: 5px;
-}
-h2 {
-  cursor: pointer;
-}
-.active {
-  color: #409eff;
-  font-size: 30px;
-}
-</style>
+<style scoped></style>
